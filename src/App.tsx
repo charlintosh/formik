@@ -1,24 +1,82 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from "react";
+import "./App.css";
+import RecruitmentForm from "./components/RecruitmentForm";
+import AdressInformation from "./components/AddressInformation";
+import Stepper from "@mui/material/Stepper";
+import Step from "@mui/material/Step";
+import StepLabel from "@mui/material/StepLabel";
+import { useFormik } from "formik";
+import { FormValues, STEP } from "./types";
+import { validationSchema } from "./utils/form/validations";
+import { initialValues } from "./utils/form/initialValues";
+
+const stepsMap: Record<STEP, any> = {
+  [STEP.FIRST_STEP]: {
+    component: RecruitmentForm,
+    label: "RecruitmentForm",
+  },
+  [STEP.SECOND_STEP]: {
+    component: AdressInformation,
+    label: "AdressInformation",
+  },
+  [STEP.THIRD_STEP]: {
+    component: null,
+    label: "TODO",
+  },
+};
 
 function App() {
+  const [step, setStep] = useState<STEP>(STEP.FIRST_STEP);
+
+  const {
+    handleChange,
+    handleBlur,
+    errors,
+    touched,
+    values,
+    isValid,
+    dirty,
+    setFieldValue,
+  } = useFormik<FormValues>({
+    initialValues,
+    validationSchema,
+    validateOnMount: true,
+    onSubmit: (e) => {
+      console.log("TODO: Kepp going only until the last step");
+    },
+  });
+
+  const handleNextStep: React.FormEventHandler<HTMLElement> = (
+    e: React.FormEvent
+  ) => {
+    e.preventDefault();
+    setStep((currentStep) => {
+      return currentStep + 1;
+    });
+  };
+
+  const FormFragmentOutlet = stepsMap[step].component;
+  
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Stepper activeStep={step} alternativeLabel>
+        {Object.entries(stepsMap).map(([key, value]) => (
+          <Step key={key}>
+            <StepLabel>{value.label}</StepLabel>
+          </Step>
+        ))}
+      </Stepper>
+      <FormFragmentOutlet
+        values={values}
+        handleChange={handleChange}
+        handleBlur={handleBlur}
+        errors={errors}
+        touched={touched}
+        isValid={isValid}
+        dirty={dirty}
+        setFieldValue={setFieldValue}
+        onSubmit={handleNextStep}
+      />
     </div>
   );
 }

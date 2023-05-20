@@ -1,0 +1,1 @@
+export { AdressInformation as default } from './AdressInformation';
