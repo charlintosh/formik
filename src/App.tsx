@@ -28,16 +28,7 @@ const stepsMap: Record<STEP, any> = {
 function App() {
   const [step, setStep] = useState<STEP>(STEP.FIRST_STEP);
 
-  const {
-    handleChange,
-    handleBlur,
-    errors,
-    touched,
-    values,
-    isValid,
-    dirty,
-    setFieldValue,
-  } = useFormik<FormValues>({
+  const globalFormik = useFormik<FormValues>({
     initialValues,
     validationSchema,
     validateOnMount: true,
@@ -49,14 +40,13 @@ function App() {
   const handleNextStep: React.FormEventHandler<HTMLElement> = (
     e: React.FormEvent
   ) => {
-    e.preventDefault();
     setStep((currentStep) => {
       return currentStep + 1;
     });
   };
 
   const FormFragmentOutlet = stepsMap[step].component;
-  
+
   return (
     <div className="App">
       <Stepper activeStep={step} alternativeLabel>
@@ -66,17 +56,7 @@ function App() {
           </Step>
         ))}
       </Stepper>
-      <FormFragmentOutlet
-        values={values}
-        handleChange={handleChange}
-        handleBlur={handleBlur}
-        errors={errors}
-        touched={touched}
-        isValid={isValid}
-        dirty={dirty}
-        setFieldValue={setFieldValue}
-        onSubmit={handleNextStep}
-      />
+      <FormFragmentOutlet {...globalFormik} onSubmit={handleNextStep} />
     </div>
   );
 }

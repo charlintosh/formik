@@ -18,7 +18,6 @@ export const recruitmentFormValitionSchema = Yup.object().shape({
       "passportNumber",
       "Required",
       function (value) {
-        console.log(value)
         const placeOfBirth = this.resolve(Yup.ref("placeOfBirth"));
         return placeOfBirth !== "Mexico" ? !!value : true;
       }
