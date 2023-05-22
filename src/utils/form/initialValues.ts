@@ -1,19 +1,66 @@
 import { FormValues } from "../../types";
 
 export const initialValues: FormValues = {
-        recruitmentInfo: {
-          userName: "",
-          paternalLastName: "",
-          maternalLastName: "",
-          gender: "",
-          preferredGender: "",
-          dateOfBirth: "",
-          placeOfBirth: "",
-          city: "",
-          state: "",
-          country: "",
-          curp: "",
-          passportNumber: "",
-          proofOfId: null,
-        }
-}
+  recruitmentInfo: {
+    userName: "",
+    paternalLastName: "",
+    maternalLastName: "",
+    gender: "",
+    preferredGender: "",
+    dateOfBirth: "",
+    placeOfBirth: "",
+    city: "",
+    state: "",
+    country: "",
+    curp: "",
+    passportNumber: "",
+    proofOfId: null,
+  },
+  adressInformation: {
+    userStreet: "",
+    userStreetA: "",
+    userStreetB: "",
+    userColony: "",
+    userState: "",
+    userPostalCode: 0,
+    userProofAdress: null,
+  },
+  extraAdressInformation: {
+    typeOfResidency: "",
+    otherResidency: "",
+    amountOfPeople: "",
+  },
+  extraPersonalInformation: {
+    userPhone: 0,
+    userEmail: "",
+    altUserEmail: "",
+    foundUs: "",
+    otherFoundUs: "",
+    sofwareDevelop: "",
+    degreeStudies: "",
+    otherDegreeStudies: "",
+    noFormalEducation: "",
+    universityName: "",
+    city: "",
+    state: "",
+    country: "",
+    nameOfDegree: "",
+    finishClasses: "",
+    haveDegree: "",
+    cedulaProfesional: "",
+    scholarship: "",
+    scholatshipLevel: "",
+    kindOfScholarship: "",
+    duration: "",
+  },
+  bankAccount:{
+    accountNumber:0,
+    CLABE:0,
+    bank:""
+  },
+  skillsInformation:{
+    programmingLanguage:"",
+    experienceInfo:"",
+    disability:"",
+  }
+};

@@ -1,12 +1,13 @@
-import React, { useEffect } from "react";
-import { useFormik } from "formik";
+//import React, { useEffect } from "react";
+//import { useFormik } from "formik";
 import TextField from "@mui/material/TextField";
 import FormControl from "@mui/material/FormControl";
 import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import Select from "@mui/material/Select";
-
-type Props = {
+import { CommonFormProps } from "../../types";
+interface extraAdressInformationProps extends CommonFormProps {}
+/*type Props = {
   typeOfResidency: string;
   otherResidency: string;
   amountOfPeople: string;
@@ -19,37 +20,26 @@ const validation = (values: Props) => {
   }
 
   return errors;
-};
-export const AdressExtraInformation = (props: Props) => {
-  const { handleChange, handleSubmit, values, touched, errors, isValid } =
-    useFormik<Props>({
-      initialValues: {
-        typeOfResidency: props.typeOfResidency || "",
-        otherResidency: props.otherResidency || "",
-        amountOfPeople: props.amountOfPeople || "",
-
-      },
-      validate: validation,
-      onSubmit: (values) => {
-        alert(JSON.stringify(values));
-      },
-    });
-
-  useEffect(() => {
-    console.log(touched, errors);
-  }, [touched, errors]);
-
+};*/
+export const AdressExtraInformation = ({
+  handleChange, 
+  onSubmit, 
+  values, 
+  touched, 
+  errors, 
+  isValid}:extraAdressInformationProps) => {
+  
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={onSubmit}>
       <FormControl fullWidth>
         <InputLabel id="typeOfResidency">Type of Residency</InputLabel>
         <Select
           id="typeOfResidency"
           name="typeOfResidency"
           label="typeOfResidency"
-          value={values.typeOfResidency}
+          value={values.extraAdressInformation.typeOfResidency}
           onChange={handleChange}
-          error={touched.typeOfResidency && Boolean(errors.typeOfResidency)}
+          error={touched?.extraAdressInformation?.typeOfResidency && Boolean(errors?.extraAdressInformation?.typeOfResidency)}
         >
           <MenuItem value="">
             <em>Select</em>
@@ -58,16 +48,16 @@ export const AdressExtraInformation = (props: Props) => {
           <MenuItem value="Owned">Owned (by me or my parents )</MenuItem>
           <MenuItem value="Other">Other</MenuItem>
         </Select>
-        {values.typeOfResidency === "Other" && (
+        {values.extraAdressInformation?.typeOfResidency === "Other" && (
           <FormControl>
             <TextField
               id="preferredGender"
               name="preferredGender"
               label="Preferred Gender"
-              value={values.otherResidency}
+              value={values.extraAdressInformation?.otherResidency}
               onChange={handleChange}
-              error={touched.otherResidency && Boolean(errors.otherResidency)}
-              helperText={touched.otherResidency && errors.otherResidency}
+              error={touched.extraAdressInformation?.otherResidency && Boolean(errors.extraAdressInformation?.otherResidency)}
+              helperText={touched.extraAdressInformation?.otherResidency && errors.extraAdressInformation?.otherResidency}
             />
           </FormControl>
         )}
@@ -78,9 +68,9 @@ export const AdressExtraInformation = (props: Props) => {
           id="amountOfPeople "
           name="amountOfPeople "
           label="amountOfPeople "
-          value={values.amountOfPeople }
+          value={values.extraAdressInformation?.amountOfPeople }
           onChange={handleChange}
-          error={touched.amountOfPeople  && Boolean(errors.amountOfPeople )}
+          error={touched.extraAdressInformation?.amountOfPeople  && Boolean(errors.extraAdressInformation?.amountOfPeople )}
         >
           <MenuItem value="">
             <em>Select</em>
