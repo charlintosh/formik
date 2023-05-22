@@ -11,6 +11,12 @@ export enum STEP {
   SIXTH_STEP,
 }
 
+export interface FormStepComponentDefinition {
+  label: string;
+  component: React.FC<CommonFormProps>;
+  moduleName: string;
+}
+
 export interface FormValues {
   recruitmentInfo: RecruitmentFormValues;
   adressInformation: AdressInformationFormValues;
@@ -36,7 +42,7 @@ export interface RecruitmentFormValues {
 }
 
 export interface CommonFormProps extends FormikHookReturnValue {
-  onSubmit: React.FormEventHandler<HTMLFormElement>;
+  
 }
 
 export interface AdressInformationFormValues {

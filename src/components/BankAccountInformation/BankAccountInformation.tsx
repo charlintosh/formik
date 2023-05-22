@@ -10,11 +10,10 @@ export const BankAccountForm = ({
   touched,
   isValid,
   handleChange,
-  handleBlur,
-  onSubmit,
+  handleBlur
 }: BankAccountFormProps) => {
   return (
-    <form onSubmit={onSubmit}>
+    <div>
       <h1>Bank Account</h1>
       <TextField
         fullWidth
@@ -73,10 +72,6 @@ export const BankAccountForm = ({
             : ""
         }
       />
-
-      <button disabled={!isValid} type="submit">
-        Next
-      </button>
-    </form>
+    </div>
   );
 };

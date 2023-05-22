@@ -4,7 +4,6 @@ import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 import MenuItem from "@mui/material/MenuItem";
 import InputLabel from "@mui/material/InputLabel";
-import { DatePicker } from '@mui/lab';
 import { CommonFormProps } from "../../types";
 
 interface RecruitmentFormProps extends CommonFormProps {}
@@ -13,14 +12,20 @@ export const RecruitmentForm = ({
   values,
   errors,
   touched,
-  isValid,
   handleChange,
   handleBlur,
-  onSubmit,
-  setFieldValue,
 }: RecruitmentFormProps) => {
+  const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files && event.target.files[0];
+    if (file) {
+      handleChange({
+        target: { name: "recruitmentInfo.proofOfId", value: file },
+      });
+    }
+  };
+
   return (
-    <form onSubmit={onSubmit}>
+    <div>
       <h1>Personal Information</h1>
       <TextField
         fullWidth
@@ -199,10 +204,7 @@ export const RecruitmentForm = ({
         type="file"
         id="proofOfId"
         name="recruitmentInfo.proofOfId"
-        onChange={(event) => {
-          const file = event.currentTarget.files?.[0];
-          setFieldValue("proofOfId", file);
-        }}
+        onChange={handleFileChange}
         onBlur={handleBlur}
       />
       <TextField
@@ -253,11 +255,6 @@ export const RecruitmentForm = ({
           touched?.recruitmentInfo?.country && errors?.recruitmentInfo?.country
         }
       />
-      
-      <button disabled={!isValid} type="submit">
-        Next
-
-      </button>
-    </form>
+    </div>
   );
 };

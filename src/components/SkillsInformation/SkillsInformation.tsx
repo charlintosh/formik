@@ -15,10 +15,9 @@ export const skillsForm = ({
   isValid,
   handleChange,
   handleBlur,
-  onSubmit,
 }: skillsInformationFormProps) => {
   return (
-    <form onSubmit={onSubmit}>
+    <div>
       <h1>Skills</h1>
       <TextField
         fullWidth
@@ -47,7 +46,10 @@ export const skillsForm = ({
           label="experienceInfo"
           value={values.skillsInformation.experienceInfo}
           onChange={handleChange}
-          error={touched?.skillsInformation?.experienceInfo && Boolean(errors?.skillsInformation?.experienceInfo)}
+          error={
+            touched?.skillsInformation?.experienceInfo &&
+            Boolean(errors?.skillsInformation?.experienceInfo)
+          }
         >
           <MenuItem value="">
             <em>Select</em>
@@ -66,7 +68,10 @@ export const skillsForm = ({
           label="disability"
           value={values.skillsInformation.disability}
           onChange={handleChange}
-          error={touched?.skillsInformation?.disability && Boolean(errors?.skillsInformation?.disability)}
+          error={
+            touched?.skillsInformation?.disability &&
+            Boolean(errors?.skillsInformation?.disability)
+          }
         >
           <MenuItem value="">
             <em>Select</em>
@@ -76,11 +81,6 @@ export const skillsForm = ({
           <MenuItem value="VisualImpairment">Visual impairment</MenuItem>
         </Select>
       </FormControl>
-
-
-      <button disabled={!isValid} type="submit">
-        Submit
-      </button>
-    </form>
+    </div>
   );
 };

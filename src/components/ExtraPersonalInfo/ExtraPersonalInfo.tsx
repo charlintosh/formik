@@ -1,30 +1,12 @@
-import React, { useEffect } from "react";
-//import { useFormik } from "formik";
 import TextField from "@mui/material/TextField";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 import MenuItem from "@mui/material/MenuItem";
 import InputLabel from "@mui/material/InputLabel";
-
 import FormLabel from "@mui/material/FormLabel";
 import { CommonFormProps } from "../../types";
+
 interface extraPersonalInformationProps extends CommonFormProps {}
-/*type Props = {
-  userPhone: number;
-  userEmail: string;
-  altUserEmail: string;
-  foundUs: string;
-  otherFoundUs: string;
-  sofwareDevelop: string;
-  degreeStudies: string;
-  otherDegreeStudies: string;
-  noFormalEducation: string;
-};
-const validationSchema = Yup.object().shape({
-  userPhone: Yup.number().required("Required"),
-  userEmail: Yup.string().required("Required"),
-  sofwareDevelop: Yup.string().required("Required"),
-});*/
 
 const STUDIES_DEGREE = {
   UNIVERSITY: { value: "1", label: "Highschool or equivalent" },
@@ -41,7 +23,6 @@ export const ExtraPersonalInfo = ({
   values,
   touched,
   errors,
-  isValid,
   setFieldValue,
   handleBlur,
 }: extraPersonalInformationProps) => {
@@ -49,9 +30,6 @@ export const ExtraPersonalInfo = ({
     return <MenuItem value={values.value}>{values.label}</MenuItem>;
   });
 
-  useEffect(() => {
-    console.log(touched, errors);
-  }, [touched, errors]);
   return (
     <form onSubmit={handleSubmit}>
       <p>Personal Information</p>
@@ -519,9 +497,7 @@ export const ExtraPersonalInfo = ({
                       onBlur={handleBlur}
                       error={
                         touched?.extraPersonalInformation?.duration &&
-                        Boolean(
-                          errors?.extraPersonalInformation?.duration
-                        )
+                        Boolean(errors?.extraPersonalInformation?.duration)
                       }
                       helperText={
                         touched?.extraPersonalInformation?.duration &&
@@ -586,10 +562,6 @@ export const ExtraPersonalInfo = ({
           </FormControl>
         )}
       </FormControl>
-
-      <button disabled={!isValid} type="submit">
-        Next
-      </button>
     </form>
   );
 };
