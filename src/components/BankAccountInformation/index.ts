@@ -1,0 +1,1 @@
+export {BankAccountForm as default} from './BankAccountInformation'

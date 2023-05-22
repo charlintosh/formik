@@ -2,6 +2,10 @@ import React, { useState } from "react";
 import "./App.css";
 import RecruitmentForm from "./components/RecruitmentForm";
 import AdressInformation from "./components/AddressInformation";
+import AdressExtraInformation from "./components/AddressExtraInformation";
+import ExtraPersonalInfo from "./components/ExtraPersonalInfo";
+import BankAccountForm from "./components/BankAccountInformation";
+import { skillsForm } from "./components/SkillsInformation/SkillsInformation";
 import Stepper from "@mui/material/Stepper";
 import Step from "@mui/material/Step";
 import StepLabel from "@mui/material/StepLabel";
@@ -20,8 +24,20 @@ const stepsMap: Record<STEP, any> = {
     label: "AdressInformation",
   },
   [STEP.THIRD_STEP]: {
-    component: null,
-    label: "TODO",
+    component: AdressExtraInformation,
+    label: "ExtraPersonalInformation",
+  },
+  [STEP.FOURTH_STEP]: {
+    component: ExtraPersonalInfo,
+    label: "ExtraPersonalInfo",
+  },
+  [STEP.FIFTH_STEP]: {
+    component: BankAccountForm,
+    label: "BankAccountForm",
+  },
+  [STEP.SIXTH_STEP]: {
+    component: skillsForm,
+    label: "Skills Form",
   },
 };
 
